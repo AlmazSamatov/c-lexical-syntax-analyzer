@@ -1,7 +1,7 @@
 import os
 
-from src.preprocessor_tool import PreprocessorTool
-from src.util import to_str
+from src.preprocessor.preprocessor_tool import PreprocessorTool
+from src.lex.util import to_str
 
 
 def start(c_code):
@@ -159,7 +159,7 @@ def parse_include_files(input_code):
             # search in directory
             end_index = input_code.find('"', begin_index + 1)
             file_name = input_code[begin_index + 1:end_index]
-            with open(os.path.dirname(__file__)[:-4] + '\libs\\' + file_name, "r") as file:
+            with open('libs/' + file_name, "r") as file:
                 file.seek(0)
                 code = file.read()
                 input_code = input_code[:include_index] + code + parse_include_files(input_code[end_index + 1:])

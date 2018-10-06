@@ -1,5 +1,5 @@
-from src.lexical_analyzer import get_next_token, scan
-import src.preprocessor as preprocessor
+from src.lex.lexical_analyzer import get_next_token, scan
+import src.preprocessor.preprocessor as preprocessor
 
 with open("in.txt", "r") as file:
     try:

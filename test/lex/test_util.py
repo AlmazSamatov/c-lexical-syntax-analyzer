@@ -1,4 +1,4 @@
-from src.util import *
+from src.lex.util import *
 
 
 def test_to_str():

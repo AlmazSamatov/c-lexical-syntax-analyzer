@@ -1,4 +1,4 @@
-from src.preprocessor import *
+from src.preprocessor.preprocessor import *
 
 
 def test_replace_all():

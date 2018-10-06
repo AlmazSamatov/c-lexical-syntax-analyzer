@@ -1,6 +1,6 @@
 import re
-from src.operators import _dictionary as op_dict
-from src.delimiters import _dictionary as del_dict
+from src.lex.operators import _dictionary as op_dict
+from src.lex.delimiters import _dictionary as del_dict
 
 
 class PreprocessorTool:

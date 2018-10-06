@@ -1,4 +1,4 @@
-from src.lexical_analyzer import *
+from src.lex.lexical_analyzer import *
 
 
 def test_1_is_delimiter():

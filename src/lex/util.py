@@ -1,7 +1,7 @@
-from src.delimiters import _dictionary as delimiters
-from src.keywords import _dictionary as keywords
-from src.operators import _dictionary as operators
-import src.general_tokens as general_tokens
+from src.lex.delimiters import _dictionary as delimiters
+from src.lex.keywords import _dictionary as keywords
+from src.lex.operators import _dictionary as operators
+import src.lex.general_tokens as general_tokens
 
 
 def to_str(list):

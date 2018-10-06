@@ -1,7 +1,7 @@
-from src.util import to_str, find_type, is_delimiter, is_operator
-from src.general_tokens import _STRING, _CHAR
-from src.util import to_str, find_type, is_delimiter, is_operator
-import src.general_tokens
+from src.lex.util import to_str, find_type, is_delimiter, is_operator
+from src.lex.general_tokens import _STRING, _CHAR
+from src.lex.util import to_str, find_type, is_delimiter, is_operator
+import src.lex.general_tokens
 
 token_it = -1
 tokens = []
@@ -18,7 +18,7 @@ def get_next_token(input_code):
         scan(input_code)
     token_it += 1
     if token_it >= len(tokens):
-        eof_token = ('_EOF', src.general_tokens._EOF)
+        eof_token = ('_EOF', src.lex.general_tokens._EOF)
         return eof_token
     return tokens[token_it]
 

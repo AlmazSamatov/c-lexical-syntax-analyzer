@@ -1,4 +1,4 @@
-from src.preprocessor_tool import PreprocessorTool
+from src.preprocessor.preprocessor_tool import PreprocessorTool
 
 
 def test_skip():
