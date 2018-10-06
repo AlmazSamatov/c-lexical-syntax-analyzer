@@ -4,10 +4,11 @@ import src.preprocessor.preprocessor as preprocessor
 with open("in.txt", "r") as file:
     try:
         preprocessed_code = preprocessor.start(file.read())
+        tokens = []
         f = open("out.txt", 'w')
         while True:
             token = get_next_token(preprocessed_code)
-            f.write(str(token) + "\n")
+            tokens.append(token)
             if token[0] == '_EOF':
                 break
     except FileNotFoundError as e:
