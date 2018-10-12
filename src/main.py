@@ -1,7 +1,9 @@
-from src.lex.lexical_analyzer import get_next_token, scan
+from src.lex.lexical_analyzer import get_next_token
+from src.syntax.syntax_analyzer import start
 import src.preprocessor.preprocessor as preprocessor
 
 with open("in.txt", "r") as file:
+    tokens = []
     try:
         preprocessed_code = preprocessor.start(file.read())
         tokens = []
@@ -17,3 +19,4 @@ with open("in.txt", "r") as file:
     except BaseException as e:
         print('Error! Unable to correctly preprocess #include statement. Error in : ' + e.args[0])
         exit(0)
+    start(tokens)

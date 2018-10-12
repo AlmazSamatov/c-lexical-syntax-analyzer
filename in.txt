@@ -1,1 +1,3 @@
-#include "header.h"
+while (a > 0) {
+    a--;
+}
