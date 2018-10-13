@@ -21,4 +21,8 @@ with open("in.txt", "r") as input_file:
         exit(0)
 
     with open("out.txt", 'w') as output_file:
-        output_file.write(to_json(generate_syntax_tree(tokens)))
+        syntax_tree = generate_syntax_tree(tokens)
+        if syntax_tree is not None:
+            output_file.write(to_json(syntax_tree))
+        else:
+            output_file.write("None")
