@@ -1,0 +1,40 @@
+{
+     "Left" : "while",
+     "Node value" : 
+     {
+          "Left" : "(",
+          "Node value" : 
+          {
+               "Left" : "a",
+               "Node value" : ">",
+               "Right" : "0"
+          },
+          "Right" : ")"
+     },
+     "Right" : 
+     {
+          "Left" : "{",
+          "Node value" : 
+          {
+               "Left" : 
+               {
+                    "Left" : "None",
+                    "Node value" : "a",
+                    "Right" : "None"
+               },
+               "Node value" : 
+               {
+                    "Left" : "None",
+                    "Node value" : 
+                    {
+                         "Left" : "None",
+                         "Node value" : "--",
+                         "Right" : "None"
+                    },
+                    "Right" : ";"
+               },
+               "Right" : "None"
+          },
+          "Right" : "}"
+     }
+}
