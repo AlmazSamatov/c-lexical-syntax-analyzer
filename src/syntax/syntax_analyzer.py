@@ -146,7 +146,10 @@ def init_declarator():
     """
     global iterator
     old_iterator = iterator
-    node_value = declarator(True)
+    if tokens[iterator-1][1] != 82:
+        node_value = declarator()
+    else:
+        node_value = declarator(True)
     if node_value is not None:
         if tokens[iterator][1] == 7:
             iterator += 1
