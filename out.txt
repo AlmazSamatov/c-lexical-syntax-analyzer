@@ -1,13 +1,18 @@
 {
-     "Left" : "None",
-     "Node value" : 
+     "Left" : 
      {
-          "Left" : 
+          "Left" : "int",
+          "Node value" : 
           {
-               "Left" : "int",
-               "Node value" : "main",
+               "Left" : "main",
+               "Node value" : "None",
                "Right" : "None"
           },
+          "Right" : "None"
+     },
+     "Node value" : 
+     {
+          "Left" : "None",
           "Node value" : 
           {
                "Left" : "None",
@@ -31,7 +36,22 @@
           "Left" : "{",
           "Node value" : 
           {
-               "Left" : "None",
+               "Left" : 
+               {
+                    "Left" : "int",
+                    "Node value" : 
+                    {
+                         "Left" : 
+                         {
+                              "Left" : "None",
+                              "Node value" : "i",
+                              "Right" : "None"
+                         },
+                         "Node value" : "=",
+                         "Right" : "2"
+                    },
+                    "Right" : ";"
+               },
                "Node value" : 
                {
                     "Left" : "for",
@@ -44,9 +64,9 @@
                               {
                                    "Left" : 
                                    {
-                                        "Left" : "count",
+                                        "Left" : "i",
                                         "Node value" : "=",
-                                        "Right" : "1"
+                                        "Right" : "0"
                                    },
                                    "Node value" : ";",
                                    "Right" : "None"
@@ -55,9 +75,9 @@
                               {
                                    "Left" : 
                                    {
-                                        "Left" : "count",
-                                        "Node value" : "<=",
-                                        "Right" : "num"
+                                        "Left" : "i",
+                                        "Node value" : "<",
+                                        "Right" : "10"
                                    },
                                    "Node value" : ";",
                                    "Right" : "None"
@@ -65,7 +85,7 @@
                               "Right" : 
                               {
                                    "Left" : "None",
-                                   "Node value" : "count",
+                                   "Node value" : "i",
                                    "Right" : "++"
                               }
                          },
@@ -77,17 +97,7 @@
                          "Node value" : 
                          {
                               "Left" : "None",
-                              "Node value" : 
-                              {
-                                   "Left" : "None",
-                                   "Node value" : 
-                                   {
-                                        "Left" : "sum",
-                                        "Node value" : "+=",
-                                        "Right" : "count"
-                                   },
-                                   "Right" : ";"
-                              },
+                              "Node value" : "None",
                               "Right" : "None"
                          },
                          "Right" : "}"

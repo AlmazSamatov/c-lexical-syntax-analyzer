@@ -60,15 +60,17 @@ def function_definition():
     global iterator
     old_iterator = iterator
     left = declaration_specifier()
+    temp_tree = None
     if left is not None:
         while True:
             old_iterator = iterator
             temp = declaration_specifier()
             if temp is not None:
-                left = Tree(left, temp)
+                temp_tree = Tree(temp, temp_tree)
             else:
                 iterator = old_iterator
                 break
+    left = Tree(left, temp_tree)
     iterator = old_iterator
     old_iterator = iterator
     node_value = declarator()
@@ -85,11 +87,11 @@ def function_definition():
                     iterator = old_iterator
                     break
         iterator = old_iterator
-        node_value = Tree(left, node_value, right)
+        node_value = Tree(node_value=node_value, right=right)
         old_iterator = iterator
         right = compound_statement()
         if right is not None:
-            return Tree(node_value=node_value, right=right)
+            return Tree(left, node_value=node_value, right=right)
         iterator = old_iterator
         return None
     iterator = old_iterator
@@ -144,7 +146,10 @@ def init_declarator():
     """
     global iterator
     old_iterator = iterator
-    node_value = declarator(True)
+    if tokens[iterator-1][1] != 82:
+        node_value = declarator()
+    else:
+        node_value = declarator(True)
     if node_value is not None:
         if tokens[iterator][1] == 7:
             iterator += 1
