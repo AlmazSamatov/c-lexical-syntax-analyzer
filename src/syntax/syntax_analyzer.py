@@ -12,6 +12,10 @@ tree = None
 
 
 def translation_unit():
+    """
+    BNF rule for translation unit
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = external_declaration()
@@ -30,6 +34,10 @@ def translation_unit():
 
 
 def external_declaration():
+    """
+    BNF rule for external declaration
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = function_definition()
@@ -45,6 +53,10 @@ def external_declaration():
 
 
 def function_definition():
+    """
+    BNF rule for function definition
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     left = declaration_specifier()
@@ -85,6 +97,10 @@ def function_definition():
 
 
 def declaration():
+    """
+    BNF rule for declaration
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     left = declaration_specifier()
@@ -122,6 +138,10 @@ def declaration():
 
 
 def init_declarator():
+    """
+    BNF rule for init declarator
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = declarator(True)
@@ -142,6 +162,10 @@ def init_declarator():
 
 
 def initializer():
+    """
+    BNF rule for initializer
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = assignment_expression()
@@ -168,6 +192,10 @@ def initializer():
 
 
 def initializer_list():
+    """
+    BNF rule for initializer list
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     left = initializer()
@@ -185,6 +213,10 @@ def initializer_list():
 
 
 def iteration_statement():
+    """
+    BNF rule for iteration_statement
+    :return: AST
+    """
     global iterator
     if tokens[iterator][1] == 79:
         iterator += 1
@@ -272,6 +304,10 @@ def iteration_statement():
 
 
 def statement():
+    """
+    BNF rule for statement
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = labeled_statement()
@@ -302,6 +338,10 @@ def statement():
 
 
 def labeled_statement():
+    """
+    BNF rule for labeled statement
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     left = identifier()
@@ -321,6 +361,10 @@ def labeled_statement():
 
 
 def expression_statement():
+    """
+    BNF rule for expression statement
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = expression()
@@ -333,6 +377,10 @@ def expression_statement():
 
 
 def compound_statement():
+    """
+    BNF rule for compound statement
+    :return: AST
+    """
     global iterator
     if tokens[iterator][1] == 41:
         iterator += 1
@@ -369,6 +417,10 @@ def compound_statement():
 
 
 def selection_statement():
+    """
+    BNF rule for selection statement
+    :return: AST
+    """
     global iterator
     if tokens[iterator][1] == 64:
         iterator += 1
@@ -426,6 +478,10 @@ def selection_statement():
 
 
 def jump_statement():
+    """
+    BNF rule for jump statement
+    :return: AST
+    """
     global iterator
     if tokens[iterator][1] == 63:
         iterator += 1
@@ -471,6 +527,10 @@ def jump_statement():
 
 
 def expression():
+    """
+    BNF rule for expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = assignment_expression()
@@ -490,6 +550,11 @@ def expression():
 
 
 def assignment_expression(node_return=False):
+    """
+    BNF rule for assignment expression
+    :param node_return: force node return if true
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = conditional_expression()
@@ -516,6 +581,10 @@ def assignment_expression(node_return=False):
 
 
 def conditional_expression():
+    """
+    BNF rule for conditional expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = logical_or_expression()
@@ -528,6 +597,10 @@ def conditional_expression():
 
 
 def logical_or_expression():
+    """
+    BNF rule for logical or expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = logical_and_expression()
@@ -546,6 +619,10 @@ def logical_or_expression():
 
 
 def logical_and_expression():
+    """
+    BNF rule for logical and expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = inclusive_or_expression()
@@ -564,6 +641,10 @@ def logical_and_expression():
 
 
 def inclusive_or_expression():
+    """
+    BNF rule for inclusive or expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = exclusive_or_expression()
@@ -582,6 +663,10 @@ def inclusive_or_expression():
 
 
 def exclusive_or_expression():
+    """
+    BNF rule for exclusive or expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = and_expression()
@@ -600,6 +685,10 @@ def exclusive_or_expression():
 
 
 def and_expression():
+    """
+    BNF rule for and expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = equality_expression()
@@ -618,6 +707,10 @@ def and_expression():
 
 
 def equality_expression():
+    """
+    BNF rule for equality expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = relational_expression()
@@ -636,6 +729,10 @@ def equality_expression():
 
 
 def relational_expression():
+    """
+    BNF rule for relational expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = shift_expression()
@@ -654,6 +751,10 @@ def relational_expression():
 
 
 def shift_expression():
+    """
+    BNF rule for shift expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = additive_expression()
@@ -672,6 +773,10 @@ def shift_expression():
 
 
 def additive_expression():
+    """
+    BNF rule for additive expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = multiplicative_expression()
@@ -690,6 +795,10 @@ def additive_expression():
 
 
 def multiplicative_expression():
+    """
+    BNF rule for multiplicative expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = cast_expression()
@@ -708,6 +817,10 @@ def multiplicative_expression():
 
 
 def cast_expression():
+    """
+    BNF rule for cast expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = unary_expression()
@@ -735,6 +848,10 @@ def cast_expression():
 
 
 def unary_expression():
+    """
+    BNF rule for unary expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = postfix_expression()
@@ -776,8 +893,12 @@ def unary_expression():
     return None
 
 
-# todo something with '.' and '->' and fix infinite recursion
+# todo something with '.' and '->'
 def postfix_expression():
+    """
+    BNF rule for postfix expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = primary_expression()
@@ -836,6 +957,10 @@ def postfix_expression():
 
 
 def primary_expression():
+    """
+    BNF rule for primary expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = identifier()
@@ -867,6 +992,10 @@ def primary_expression():
 
 
 def assignment_operator():
+    """
+    BNF rule for assignment operator
+    :return: operator
+    """
     global iterator
     if tokens[iterator][1] in assignment_codes:
         iterator += 1
@@ -875,6 +1004,10 @@ def assignment_operator():
 
 
 def unary_operator():
+    """
+    BNF rule for external declaration
+    :return: operator
+    """
     global iterator
     if tokens[iterator][1] in unary_codes:
         iterator += 1
@@ -883,6 +1016,10 @@ def unary_operator():
 
 
 def type_name():
+    """
+    BNF rule for type name
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = specifier_qualifier()
@@ -905,6 +1042,10 @@ def type_name():
 
 
 def specifier_qualifier():
+    """
+    BNF rule for specifier qualifier
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = type_specifier()
@@ -920,6 +1061,10 @@ def specifier_qualifier():
 
 
 def type_specifier():
+    """
+    BNF rule for type specifier
+    :return: AST
+    """
     global iterator
     if tokens[iterator][1] in type_specifier_codes:
         iterator += 1
@@ -943,6 +1088,10 @@ def type_specifier():
 
 
 def struct_or_union_specifier():
+    """
+    BNF rule for struct or union specifier
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     left = struct_or_union()
@@ -995,6 +1144,10 @@ def struct_or_union_specifier():
 
 
 def struct_declaration():
+    """
+    BNF rule for struct declaration
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     left = specifier_qualifier()
@@ -1017,6 +1170,10 @@ def struct_declaration():
 
 
 def struct_declarator_list():
+    """
+    BNF rule for struct declaration list
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = struct_declarator()
@@ -1035,6 +1192,10 @@ def struct_declarator_list():
 
 
 def struct_declarator():
+    """
+    BNF rule for struct declarator
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = declarator()
@@ -1055,6 +1216,11 @@ def struct_declarator():
 
 
 def declarator(decrease_iterator=False):
+    """
+    BNF rule for declarator
+    :param decrease_iterator: force decrease iterator
+    :return: AST
+    """
     global iterator
     if decrease_iterator:
         iterator -= 1
@@ -1072,6 +1238,10 @@ def declarator(decrease_iterator=False):
 
 
 def direct_declarator():
+    """
+    BNF rule for direct declarator
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = identifier()
@@ -1142,6 +1312,10 @@ def direct_declarator():
 
 
 def constant_expression():
+    """
+    BNF rule for constant expression
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = conditional_expression()
@@ -1152,6 +1326,10 @@ def constant_expression():
 
 
 def pointer():
+    """
+    BNF rule for pointer
+    :return: AST
+    """
     global iterator
     if tokens[iterator][1] == 4:
         iterator += 1
@@ -1177,6 +1355,10 @@ def pointer():
 
 
 def parameter_type_list():
+    """
+    BNF rule for parameter type list
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = parameter_list()
@@ -1194,6 +1376,10 @@ def parameter_type_list():
 
 
 def parameter_list():
+    """
+    BNF rule for parameter list
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = parameter_declaration()
@@ -1212,6 +1398,10 @@ def parameter_list():
 
 
 def parameter_declaration():
+    """
+    BNF rule for parameter declaration
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     left = declaration_specifier()
@@ -1240,6 +1430,10 @@ def parameter_declaration():
 
 
 def declaration_specifier():
+    """
+    BNF rule for declaration specifier
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = storage_class_specifier()
@@ -1260,6 +1454,10 @@ def declaration_specifier():
 
 
 def abstract_declarator():
+    """
+    BNF rule for abstract declarator
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     left = pointer()
@@ -1279,6 +1477,10 @@ def abstract_declarator():
 
 
 def direct_abstract_declarator():
+    """
+    BNF rule for direct abstract declarator
+    :return: AST
+    """
     global iterator
     if tokens[iterator][1] == 39:
         iterator += 1
@@ -1318,6 +1520,10 @@ def direct_abstract_declarator():
 
 
 def enum_specifier():
+    """
+    BNF rule for enum specifier
+    :return: AST
+    """
     global iterator
     if tokens[iterator][1] == 59:
         iterator += 1
@@ -1342,6 +1548,10 @@ def enum_specifier():
 
 
 def enumerator_list():
+    """
+    BNF rule for enumerator list
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = enumerator()
@@ -1360,6 +1570,10 @@ def enumerator_list():
 
 
 def enumerator():
+    """
+    BNF rule for enumerator
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = identifier()
@@ -1379,6 +1593,10 @@ def enumerator():
 
 
 def typedef_name():
+    """
+    BNF rule for typedef name
+    :return: AST
+    """
     global iterator
     old_iterator = iterator
     node_value = identifier()
@@ -1389,6 +1607,10 @@ def typedef_name():
 
 
 def type_qualifier():
+    """
+    BNF rule for type qualifier
+    :return: type qualifier
+    """
     global iterator
     if tokens[iterator][1] in type_qualifier_codes:
         iterator += 1
@@ -1397,6 +1619,10 @@ def type_qualifier():
 
 
 def struct_or_union():
+    """
+    BNF rule for struct or union
+    :return: struct or union
+    """
     global iterator
     if tokens[iterator][1] in struct_or_union_codes:
         iterator += 1
@@ -1405,6 +1631,10 @@ def struct_or_union():
 
 
 def storage_class_specifier():
+    """
+    BNF rule for class specifier
+    :return: class specifier
+    """
     global iterator
     if tokens[iterator][1] in storage_class_specifier_codes:
         iterator += 1
@@ -1413,6 +1643,10 @@ def storage_class_specifier():
 
 
 def identifier():
+    """
+    BNF rule for identifier
+    :return: identifier
+    """
     global iterator
     if tokens[iterator][1] == 82:
         iterator += 1
@@ -1421,6 +1655,10 @@ def identifier():
 
 
 def integer_constant():
+    """
+    BNF rule for integer constant
+    :return: integer constant
+    """
     global iterator
     if tokens[iterator][1] == 1:
         iterator += 1
@@ -1429,6 +1667,10 @@ def integer_constant():
 
 
 def character_constant():
+    """
+    BNF rule for character_constant
+    :return: character constant
+    """
     global iterator
     if tokens[iterator][1] == 83:
         iterator += 1
@@ -1437,6 +1679,10 @@ def character_constant():
 
 
 def floating_constant():
+    """
+    BNF rule for floating constant
+    :return: type qualifier
+    """
     global iterator
     if tokens[iterator][1] == 81:
         iterator += 1
@@ -1445,6 +1691,10 @@ def floating_constant():
 
 
 def constant():
+    """
+    BNF rule for constant
+    :return: constant
+    """
     global iterator
     old_iterator = iterator
     constant = integer_constant()
@@ -1465,6 +1715,11 @@ def constant():
 
 
 def generate_syntax_tree(input_tokens):
+    """
+    Starting parser and generating tree
+    :param input_tokens: tokens to generate tree from
+    :return: AST
+    """
     global tokens
     tokens = input_tokens
     tree = translation_unit()
