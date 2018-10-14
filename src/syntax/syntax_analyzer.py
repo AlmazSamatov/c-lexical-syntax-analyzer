@@ -100,7 +100,11 @@ def declaration():
         old_iterator = iterator
         node_value = init_declarator()
         if node_value is not None:
+            counter = 0
             while True:
+                counter += 1
+                if counter > 5:
+                    return None
                 old_iterator = iterator
                 temp = init_declarator()
                 if temp is not None:
@@ -111,7 +115,7 @@ def declaration():
         iterator = old_iterator
         if tokens[iterator][1] == 85:
             iterator += 1
-            right = tokens[iterator - 1][0]
+            right = tokens[iterator-1][0]
             return Tree(left, node_value, right)
     iterator = old_iterator
     return None
@@ -120,13 +124,13 @@ def declaration():
 def init_declarator():
     global iterator
     old_iterator = iterator
-    node_value = declarator()
+    node_value = declarator(True)
     if node_value is not None:
         if tokens[iterator][1] == 7:
             iterator += 1
             old_iterator = iterator
             left = node_value
-            node_value = tokens[iterator - 1][0]
+            node_value = tokens[iterator-1][0]
             right = initializer()
             if right is not None:
                 return Tree(left, node_value, right)
@@ -146,7 +150,7 @@ def initializer():
     iterator = old_iterator
     if tokens[iterator][1] == 41:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         old_iterator = iterator
         node_value = initializer_list()
         if node_value is not None:
@@ -155,7 +159,7 @@ def initializer():
                 node_value = Tree(node_value, ',')
             if tokens[iterator][1] == 42:
                 iterator += 1
-                right = tokens[iterator - 1][0]
+                right = tokens[iterator-1][0]
                 return Tree(left, node_value, right)
             return None
         iterator = old_iterator
@@ -170,7 +174,7 @@ def initializer_list():
     if left is not None:
         if tokens[iterator][1] == 34:
             iterator += 1
-            node_value = tokens[iterator - 1][0]
+            node_value = tokens[iterator-1][0]
             old_iterator = iterator
             right = initializer_list()
             if right is None:
@@ -184,7 +188,7 @@ def iteration_statement():
     global iterator
     if tokens[iterator][1] == 79:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         if tokens[iterator][1] == 39:
             iterator += 1
             old_iterator = iterator
@@ -204,7 +208,7 @@ def iteration_statement():
         return None
     if tokens[iterator][1] == 56:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         old_iterator = iterator
         node_value = statement()
         if node_value is not None:
@@ -230,7 +234,7 @@ def iteration_statement():
         return None
     if tokens[iterator][1] == 62:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         if tokens[iterator][1] == 39:
             iterator += 1
             old_iterator = iterator
@@ -309,7 +313,7 @@ def labeled_statement():
     if left is not None:
         if tokens[iterator][1] == 36:
             iterator += 1
-            node_value = tokens[iterator - 1][0]
+            node_value = tokens[iterator-1][0]
             old_iterator = iterator
             right = statement()
             if right is not None:
@@ -327,7 +331,7 @@ def expression_statement():
     node_value = expression()
     if tokens[iterator][1] == 85:
         iterator += 1
-        right = tokens[iterator - 1][0]
+        right = tokens[iterator-1][0]
         return Tree(node_value=node_value, right=right)
     iterator = old_iterator
     return None
@@ -337,7 +341,7 @@ def compound_statement():
     global iterator
     if tokens[iterator][1] == 41:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         old_iterator = iterator
         first_node_value = declaration()
         if first_node_value is not None:
@@ -363,7 +367,7 @@ def compound_statement():
         node_value = Tree(first_node_value, second_node_value)
         if tokens[iterator][1] == 42:
             iterator += 1
-            right = tokens[iterator - 1][0]
+            right = tokens[iterator-1][0]
             return Tree(left, node_value, right)
         return None
     return None
@@ -373,13 +377,13 @@ def selection_statement():
     global iterator
     if tokens[iterator][1] == 64:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         if tokens[iterator][1] == 39:
             iterator += 1
             old_iterator = iterator
             node_value = expression()
             if node_value is not None:
-                if tokens[iterator][1] == 39:
+                if tokens[iterator][1] == 40:
                     iterator += 1
                     node_value = Tree('(', node_value, ')')
                     old_iterator = iterator
@@ -404,7 +408,7 @@ def selection_statement():
         return None
     if tokens[iterator][1] == 73:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         if tokens[iterator][1] == 39:
             iterator += 1
             old_iterator = iterator
@@ -430,20 +434,20 @@ def jump_statement():
     global iterator
     if tokens[iterator][1] == 63:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         old_iterator = iterator
         node_value = identifier()
         if node_value is not None:
             if tokens[iterator][1] == 85:
                 iterator += 1
-                right = tokens[iterator - 1][0]
+                right = tokens[iterator-1][0]
                 return Tree(left, node_value, right)
             return None
         iterator = old_iterator
         return None
     if tokens[iterator][1] == 54:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         if tokens[iterator][1] == 85:
             iterator += 1
             node_value = tokens[iterator - 1][0]
@@ -451,7 +455,7 @@ def jump_statement():
         return None
     if tokens[iterator][1] == 50:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         if tokens[iterator][1] == 85:
             iterator += 1
             node_value = tokens[iterator - 1][0]
@@ -459,7 +463,7 @@ def jump_statement():
         return None
     if tokens[iterator][1] == 68:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         old_iterator = iterator
         node_value = expression()
         if node_value is None:
@@ -479,7 +483,7 @@ def expression():
         if tokens[iterator][1] == 34:
             iterator += 1
             left = node_value
-            node_value = tokens[iterator - 1][0]
+            node_value = tokens[iterator-1][0]
             old_iterator = iterator
             right = expression()
             if right is None:
@@ -510,7 +514,8 @@ def assignment_expression(node_return=False):
                 return Tree(left, node_value, right)
             iterator = old_iterator
         iterator = old_iterator
-        return None
+        if left is not None:
+            return left
     iterator = old_iterator
     return None
 
@@ -535,7 +540,7 @@ def logical_or_expression():
         if tokens[iterator][1] == 20:
             iterator += 1
             left = node_value
-            node_value = tokens[iterator - 1][0]
+            node_value = tokens[iterator-1][0]
             old_iterator = iterator
             right = logical_or_expression()
             if right is None:
@@ -743,7 +748,7 @@ def unary_expression():
     iterator = old_iterator
     if tokens[iterator][1] in [87, 88]:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         old_iterator = iterator
         node_value = unary_expression()
         if node_value is not None:
@@ -849,7 +854,7 @@ def primary_expression():
     iterator = old_iterator
     if tokens[iterator][1] == 84:
         iterator += 1
-        node_value = tokens[iterator - 1][0]
+        node_value = tokens[iterator-1][0]
         return node_value
     if tokens[iterator][1] == 39:
         iterator += 1
@@ -870,7 +875,7 @@ def assignment_operator():
     global iterator
     if tokens[iterator][1] in assignment_codes:
         iterator += 1
-        return tokens[iterator - 1][0]
+        return tokens[iterator-1][0]
     return None
 
 
@@ -878,7 +883,7 @@ def unary_operator():
     global iterator
     if tokens[iterator][1] in unary_codes:
         iterator += 1
-        return tokens[iterator - 1][0]
+        return tokens[iterator-1][0]
     return None
 
 
@@ -923,7 +928,7 @@ def type_specifier():
     global iterator
     if tokens[iterator][1] in type_specifier_codes:
         iterator += 1
-        return tokens[iterator - 1][0]
+        return tokens[iterator-1][0]
     old_iterator = iterator
     node_value = struct_or_union_specifier()
     if node_value is not None:
@@ -1054,8 +1059,10 @@ def struct_declarator():
     iterator = old_iterator
 
 
-def declarator():
+def declarator(decrease_iterator=False):
     global iterator
+    if decrease_iterator:
+        iterator -= 1
     old_iterator = iterator
     left = pointer()
     if left is None:
@@ -1078,7 +1085,7 @@ def direct_declarator():
     iterator = old_iterator
     if tokens[iterator][1] == 39:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         old_iterator = iterator
         node_value = declarator()
         if node_value is not None:
@@ -1153,7 +1160,7 @@ def pointer():
     global iterator
     if tokens[iterator][1] == 4:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         old_iterator = iterator
         node_value = type_qualifier()
         if node_value is not None:
@@ -1280,7 +1287,7 @@ def direct_abstract_declarator():
     global iterator
     if tokens[iterator][1] == 39:
         iterator += 1
-        left = tokens[iterator - 1][0]
+        left = tokens[iterator-1][0]
         old_iterator = iterator
         node_value = abstract_declarator()
         if node_value is not None:
@@ -1365,7 +1372,7 @@ def enumerator():
         if tokens[iterator][1] == 7:
             iterator += 1
             left = node_value
-            node_value = tokens[iterator - 1][0]
+            node_value = tokens[iterator-1][0]
             old_iterator = iterator
             right = constant_expression()
             if right is not None:
@@ -1398,7 +1405,7 @@ def struct_or_union():
     global iterator
     if tokens[iterator][1] in struct_or_union_codes:
         iterator += 1
-        return tokens[iterator - 1][0]
+        return tokens[iterator-1][0]
     return None
 
 
@@ -1406,7 +1413,7 @@ def storage_class_specifier():
     global iterator
     if tokens[iterator][1] in storage_class_specifier_codes:
         iterator += 1
-        return tokens[iterator - 1][0]
+        return tokens[iterator-1][0]
     return None
 
 
@@ -1414,7 +1421,7 @@ def identifier():
     global iterator
     if tokens[iterator][1] == 82:
         iterator += 1
-        return tokens[iterator - 1][0]
+        return tokens[iterator-1][0]
     return None
 
 
@@ -1422,7 +1429,7 @@ def integer_constant():
     global iterator
     if tokens[iterator][1] == 1:
         iterator += 1
-        return tokens[iterator - 1][0]
+        return tokens[iterator-1][0]
     return None
 
 
@@ -1430,7 +1437,7 @@ def character_constant():
     global iterator
     if tokens[iterator][1] == 83:
         iterator += 1
-        return tokens[iterator - 1][0]
+        return tokens[iterator-1][0]
     return None
 
 
@@ -1438,7 +1445,7 @@ def floating_constant():
     global iterator
     if tokens[iterator][1] == 81:
         iterator += 1
-        return tokens[iterator - 1][0]
+        return tokens[iterator-1][0]
     return None
 
 
@@ -1462,8 +1469,8 @@ def constant():
     return None
 
 
-def generate_syntax_tree(input_tokens):
+def start(input_tokens):
     global tokens
     tokens = input_tokens
     tree = translation_unit()
-    return tree
+    print(str(tree))
