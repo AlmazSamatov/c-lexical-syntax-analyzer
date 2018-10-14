@@ -1,4 +1,5 @@
 import src.preprocessor.preprocessor as preprocessor
+from src.balancer.balancer import balance
 from src.json.generate_json import to_json
 from src.lex.lexical_analyzer import get_next_token
 from src.syntax.syntax_analyzer import generate_syntax_tree
@@ -22,6 +23,7 @@ with open("in.txt", "r") as input_file:
 
     with open("out.txt", 'w') as output_file:
         syntax_tree = generate_syntax_tree(tokens)
+        syntax_tree = balance(syntax_tree)
         if syntax_tree is not None:
             output_file.write(to_json(syntax_tree))
         else:
