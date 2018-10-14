@@ -7,6 +7,8 @@ def to_json(tree, spaces_needed=0):
     json_tree = [spaces_needed * five_spaces, '{\n']
     branches = [(tree.left, 'Left'), (tree.node_value, 'Node value'), (tree.right, 'Right')]
     for branch, branch_name in branches:
+        if branch is None:
+            continue
         if isinstance(branch, str):
             json_tree.append((spaces_needed + 1) * five_spaces)
             json_tree.append('"{}" : "{}"'.format(branch_name, branch))
