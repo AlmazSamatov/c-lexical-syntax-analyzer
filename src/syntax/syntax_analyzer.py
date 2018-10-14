@@ -255,19 +255,14 @@ def iteration_statement():
                     node_value = expression()
                     if node_value is None:
                         iterator = old_iterator
-                    if tokens[iterator][1] == 85:
+                    if tokens[iterator][1] == 40:
                         iterator += 1
-                        old_iterator = iterator
-                        third_tree = Tree(node_value, ';')
-                        if tokens[iterator][1] == 40:
-                            iterator += 1
-                            right = statement()
-                            if right is not None:
-                                node_value = Tree(first_tree, second_tree, third_tree)
-                                node_value = Tree('(', node_value, ')')
-                                return Tree(left, node_value, right)
-                            iterator = old_iterator
-                            return None
+                        right = statement()
+                        if right is not None:
+                            node_value = Tree(first_tree, second_tree, node_value)
+                            node_value = Tree('(', node_value, ')')
+                            return Tree(left, node_value, right)
+                        iterator = old_iterator
                         return None
                     return None
                 return None
