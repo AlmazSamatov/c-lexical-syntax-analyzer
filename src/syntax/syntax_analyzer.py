@@ -1469,8 +1469,8 @@ def constant():
     return None
 
 
-def start(input_tokens):
+def generate_syntax_tree(input_tokens):
     global tokens
     tokens = input_tokens
     tree = translation_unit()
-    print(str(tree))
+    return tree
