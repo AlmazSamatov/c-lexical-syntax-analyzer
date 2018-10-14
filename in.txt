@@ -1,6 +1,6 @@
 int main(){
-    for(count = 1; count <= num; count++)
-    {
-        sum += count;
+    int i = 2;
+    for(i = 0; i < 10; i++){
+
     }
 }
