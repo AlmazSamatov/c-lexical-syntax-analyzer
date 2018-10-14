@@ -1,37 +1,97 @@
 {
-     "Left" : "while",
+     "Left" : "None",
      "Node value" : 
      {
-          "Left" : "(",
+          "Left" : 
+          {
+               "Left" : "int",
+               "Node value" : "main",
+               "Right" : "None"
+          },
           "Node value" : 
           {
-               "Left" : "a",
-               "Node value" : ">",
-               "Right" : "0"
+               "Left" : "None",
+               "Node value" : 
+               {
+                    "Left" : "None",
+                    "Node value" : 
+                    {
+                         "Left" : "(",
+                         "Node value" : "None",
+                         "Right" : ")"
+                    },
+                    "Right" : "None"
+               },
+               "Right" : "None"
           },
-          "Right" : ")"
+          "Right" : "None"
      },
      "Right" : 
      {
           "Left" : "{",
           "Node value" : 
           {
-               "Left" : 
-               {
-                    "Left" : "None",
-                    "Node value" : "a",
-                    "Right" : "None"
-               },
+               "Left" : "None",
                "Node value" : 
                {
-                    "Left" : "None",
+                    "Left" : "for",
                     "Node value" : 
                     {
-                         "Left" : "None",
-                         "Node value" : "--",
-                         "Right" : "None"
+                         "Left" : "(",
+                         "Node value" : 
+                         {
+                              "Left" : 
+                              {
+                                   "Left" : 
+                                   {
+                                        "Left" : "count",
+                                        "Node value" : "=",
+                                        "Right" : "1"
+                                   },
+                                   "Node value" : ";",
+                                   "Right" : "None"
+                              },
+                              "Node value" : 
+                              {
+                                   "Left" : 
+                                   {
+                                        "Left" : "count",
+                                        "Node value" : "<=",
+                                        "Right" : "num"
+                                   },
+                                   "Node value" : ";",
+                                   "Right" : "None"
+                              },
+                              "Right" : 
+                              {
+                                   "Left" : "None",
+                                   "Node value" : "count",
+                                   "Right" : "++"
+                              }
+                         },
+                         "Right" : ")"
                     },
-                    "Right" : ";"
+                    "Right" : 
+                    {
+                         "Left" : "{",
+                         "Node value" : 
+                         {
+                              "Left" : "None",
+                              "Node value" : 
+                              {
+                                   "Left" : "None",
+                                   "Node value" : 
+                                   {
+                                        "Left" : "sum",
+                                        "Node value" : "+=",
+                                        "Right" : "count"
+                                   },
+                                   "Right" : ";"
+                              },
+                              "Right" : "None"
+                         },
+                         "Right" : "}"
+                    }
                },
                "Right" : "None"
           },
