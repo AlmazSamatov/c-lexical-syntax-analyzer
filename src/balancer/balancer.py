@@ -9,7 +9,10 @@ def balance(tree):
             tree.node_value = None
 
         if tree.left is None and tree.right is None and subtree.left is None and subtree.right is None and \
-            isinstance(subtree.node_value, Tree) and not isinstance(subtree.node_value.node_value, Tree):
+                isinstance(subtree.node_value, Tree) \
+                and ((isinstance(subtree.node_value.node_value, Tree) and
+                      subtree.node_value.right is not None and subtree.node_value.left is not None)
+                     or not isinstance(subtree.node_value.node_value, Tree)):
             tree.left = subtree.node_value.left
             tree.right = subtree.node_value.right
             tree.node_value = subtree.node_value.node_value
