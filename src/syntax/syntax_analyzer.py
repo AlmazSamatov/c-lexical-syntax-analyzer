@@ -35,7 +35,8 @@ def external_declaration():
     node_value = function_definition()
     if node_value is not None:
         return node_value
-    iterator = old_iterator
+    else:
+        iterator = old_iterator
     node_value = declaration()
     if node_value is not None:
         return node_value
@@ -56,11 +57,11 @@ def function_definition():
             else:
                 iterator = old_iterator
                 break
-    else:
-        iterator = old_iterator
+    iterator = old_iterator
     old_iterator = iterator
     node_value = declarator()
     if node_value is not None:
+        old_iterator = iterator
         right = declaration()
         if right is not None:
             while True:
@@ -71,8 +72,7 @@ def function_definition():
                 else:
                     iterator = old_iterator
                     break
-        else:
-            iterator = old_iterator
+        iterator = old_iterator
         node_value = Tree(left, node_value, right)
         old_iterator = iterator
         right = compound_statement()
@@ -89,14 +89,14 @@ def declaration():
     old_iterator = iterator
     left = declaration_specifier()
     if left is not None:
-        while True:
-            old_iterator = iterator
-            temp = declaration_specifier()
-            if temp is not None:
-                left = Tree(left, temp)
-            else:
-                iterator = old_iterator
-                break
+        # while True:
+        #     old_iterator = iterator
+        #     temp = declaration_specifier()
+        #     if temp is not None:
+        #         left = Tree(left, temp)
+        #     else:
+        #
+        #         break
         old_iterator = iterator
         node_value = init_declarator()
         if node_value is not None:
@@ -108,8 +108,7 @@ def declaration():
                 else:
                     iterator = old_iterator
                     break
-        else:
-            iterator = old_iterator
+        iterator = old_iterator
         if tokens[iterator][1] == 85:
             iterator += 1
             right = tokens[iterator-1][0]
@@ -256,12 +255,15 @@ def iteration_statement():
                         iterator += 1
                         old_iterator = iterator
                         third_tree = Tree(node_value, ';')
-                        right = statement()
-                        if right is not None:
-                            node_value = Tree(first_tree, second_tree, third_tree)
-                            node_value = Tree('(', node_value, ')')
-                            return Tree(left, node_value, right)
-                        iterator = old_iterator
+                        if tokens[iterator][1] == 40:
+                            iterator += 1
+                            right = statement()
+                            if right is not None:
+                                node_value = Tree(first_tree, second_tree, third_tree)
+                                node_value = Tree('(', node_value, ')')
+                                return Tree(left, node_value, right)
+                            iterator = old_iterator
+                            return None
                         return None
                     return None
                 return None
@@ -296,7 +298,7 @@ def statement():
     node_value = jump_statement()
     if node_value is not None:
         return node_value
-    iterator = old_iterator
+
     return None
 
 
@@ -318,6 +320,7 @@ def labeled_statement():
     iterator = old_iterator
     return None
 
+
 def expression_statement():
     global iterator
     old_iterator = iterator
@@ -336,29 +339,27 @@ def compound_statement():
         iterator += 1
         left = tokens[iterator-1][0]
         old_iterator = iterator
-        first_node_value = declarator()
+        first_node_value = declaration()
         if first_node_value is not None:
             while True:
                 old_iterator = iterator
-                temp = declarator()
+                temp = declaration()
                 if temp is not None:
                     first_node_value = Tree(first_node_value, temp)
                 else:
                     break
-        else:
-            iterator = old_iterator
+        iterator = old_iterator
         old_iterator = iterator
         second_node_value = statement()
         if second_node_value is not None:
             while True:
                 old_iterator = iterator
-                temp = declarator()
+                temp = statement()
                 if temp is not None:
                     second_node_value = Tree(second_node_value, temp)
                 else:
                     break
-        else:
-            iterator = old_iterator
+        iterator = old_iterator
         node_value = Tree(first_node_value, second_node_value)
         if tokens[iterator][1] == 42:
             iterator += 1
@@ -461,6 +462,8 @@ def jump_statement():
         left = tokens[iterator-1][0]
         old_iterator = iterator
         node_value = expression()
+        if node_value is None:
+            iterator = old_iterator
         if tokens[iterator][1] == 85:
             iterator += 1
             right = tokens[iterator - 1][0]
@@ -487,24 +490,25 @@ def expression():
     return None
 
 
-def assignment_expression():
+def assignment_expression(node_return=False):
     global iterator
     old_iterator = iterator
-    expression = conditional_expression()
-    if expression is not None:
-        return expression
+    node_value = conditional_expression()
+    if (node_value is not None and node_return) or type(node_value) == Tree:
+        return node_value
     iterator = old_iterator
     old_iterator = iterator
-    expression = unary_expression()
-    if expression is not None:
-        left = expression
+    node_value = unary_expression()
+    if node_value is not None:
+        left = node_value
         old_iterator = iterator
-        expression = assignment_operator()
-        if expression is not None:
+        node_value = assignment_operator()
+        if node_value is not None:
             old_iterator = iterator
-            right = assignment_expression()
+            right = assignment_expression(True)
             if right is not None:
-                return Tree(left, expression, right)
+                return Tree(left, node_value, right)
+            iterator = old_iterator
         iterator = old_iterator
         return None
     iterator = old_iterator
@@ -514,11 +518,11 @@ def assignment_expression():
 def conditional_expression():
     global iterator
     old_iterator = iterator
-    expression = logical_or_expression()
-    if expression is not None:
+    node_value = logical_or_expression()
+    if node_value is not None:
         if tokens[iterator][1] == 35:
             iterator += 1
-        return expression
+        return node_value
     iterator = old_iterator
     return None
 
@@ -778,56 +782,57 @@ def postfix_expression():
     old_iterator = iterator
     node_value = primary_expression()
     if node_value is not None:
+        if tokens[iterator][1] == 37:
+            iterator += 1
+            old_iterator = iterator
+            node_value = expression()
+            if node_value is not None:
+                if tokens[iterator][1] == 38:
+                    iterator += 1
+                    right = Tree('[', node_value, ']')
+                    old_iterator = iterator
+                    left = postfix_expression()
+                    if left is None:
+                        iterator = old_iterator
+                    return Tree(left, node_value, right)
+                return None
+            iterator = old_iterator
+            return None
+        if tokens[iterator][1] == 39:
+            iterator += 1
+            left = node_value
+            old_iterator = iterator
+            node_value = expression()
+            if node_value is not None:
+                while True:
+                    old_iterator = iterator
+                    temp = expression()
+                    if temp is not None:
+                        node_value = Tree(left, node_value, temp)
+                    else:
+                        iterator = old_iterator
+                        break
+                if tokens[iterator][1] == 40:
+                    iterator += 1
+                    right = Tree('(', node_value, ')')
+                    old_iterator = iterator
+                    left = postfix_expression()
+                    if left is None:
+                        iterator = old_iterator
+                    return Tree(left, node_value, right)
+                return None
+            iterator = old_iterator
+            return None
+        if tokens[iterator][1] in [87, 88]:
+            iterator += 1
+            right = tokens[iterator-1][0]
+            old_iterator = iterator
+            left = postfix_expression()
+            if left is None:
+                iterator = old_iterator
+            return Tree(left, node_value, right)
         return node_value
     iterator = old_iterator
-    if tokens[iterator][1] == 37:
-        iterator += 1
-        old_iterator = iterator
-        node_value = expression()
-        if node_value is not None:
-            if tokens[iterator][1] == 38:
-                iterator += 1
-                right = Tree('[', node_value, ']')
-                old_iterator = iterator
-                left = postfix_expression()
-                if left is None:
-                    iterator = old_iterator
-                return Tree(left, right)
-            return None
-        iterator = old_iterator
-        return None
-    if tokens[iterator][1] == 39:
-        iterator += 1
-        old_iterator = iterator
-        node_value = expression()
-        if node_value is not None:
-            while True:
-                old_iterator = iterator
-                temp = expression()
-                if temp is not None:
-                    node_value = Tree(node_value, temp)
-                else:
-                    iterator = old_iterator
-                    break
-            if tokens[iterator][1] == 40:
-                iterator += 1
-                right = Tree('(', node_value, ')')
-                old_iterator = iterator
-                left = postfix_expression()
-                if left is None:
-                    iterator = old_iterator
-                return Tree(left, right)
-            return None
-        iterator = old_iterator
-        return None
-    if tokens[iterator][1] in [87, 88]:
-        iterator += 1
-        right = tokens[iterator-1][0]
-        old_iterator = iterator
-        left = postfix_expression()
-        if left is None:
-            iterator = old_iterator
-        return Tree(left, right)
 
 
 def primary_expression():
@@ -859,6 +864,7 @@ def primary_expression():
             return None
         iterator = old_iterator
         return None
+
 
 def assignment_operator():
     global iterator
@@ -893,6 +899,7 @@ def type_name():
         node_value = abstract_declarator()
         if node_value is not None:
             return Tree(left, node_value)
+        iterator = old_iterator
     iterator = old_iterator
     return None
 
@@ -1036,6 +1043,7 @@ def struct_declarator():
             iterator += 1
             left = node_value
             node_value = tokens[iterator-1][0]
+            old_iterator = iterator
             right = constant_expression()
             if right is not None:
                 return Tree(left, node_value, right)
@@ -1050,6 +1058,8 @@ def declarator():
     global iterator
     old_iterator = iterator
     left = pointer()
+    if left is None:
+        iterator = old_iterator
     old_iterator = iterator
     node_value = direct_declarator()
     if node_value is not None:
@@ -1065,42 +1075,25 @@ def direct_declarator():
     node_value = identifier()
     if node_value is not None:
         return node_value
-    if tokens[iterator][1] in type_specifier_codes:
+    iterator = old_iterator
+    if tokens[iterator][1] == 39:
         iterator += 1
         left = tokens[iterator-1][0]
         old_iterator = iterator
         node_value = declarator()
         if node_value is not None:
-            if tokens[iterator][1] in type_specifier_codes:
+            if tokens[iterator][1] == 40:
                 iterator += 1
                 right = tokens[iterator - 1][0]
                 return Tree(left, node_value, right)
             return None
         iterator = old_iterator
-        return None
-    if tokens[iterator][1] == 37:
-        iterator += 1
-        old_iterator = iterator
-        node_value = constant_expression()
-        if node_value is None:
-            iterator = old_iterator
-        if tokens[iterator][1] == 38:
-            iterator += 1
-            node_value = Tree('[', node_value, ']')
-            old_iterator = iterator
-            left = direct_declarator()
-            if left is None:
-                iterator = old_iterator
-            return Tree(left, node_value)
-        return None
-    if tokens[iterator][1] == 39:
-        iterator += 1
-        old_iterator = iterator
         node_value = parameter_type_list()
         if node_value is not None:
             if tokens[iterator][1] == 40:
                 iterator += 1
                 node_value = Tree('(', node_value, ')')
+                old_iterator = iterator
                 left = direct_declarator()
                 if left is None:
                     iterator = old_iterator
@@ -1123,10 +1116,26 @@ def direct_declarator():
         if tokens[iterator][1] == 40:
             iterator += 1
             node_value = Tree('(', node_value, ')')
+            old_iterator = iterator
             left = direct_declarator()
             if left is None:
                 iterator = old_iterator
             return Tree(left, node_value)
+    if tokens[iterator][1] == 37:
+        iterator += 1
+        old_iterator = iterator
+        node_value = constant_expression()
+        if node_value is None:
+            iterator = old_iterator
+        if tokens[iterator][1] == 38:
+            iterator += 1
+            node_value = Tree('[', node_value, ']')
+            old_iterator = iterator
+            left = direct_declarator()
+            if left is None:
+                iterator = old_iterator
+            return Tree(left, node_value)
+        return None
     return None
 
 
@@ -1217,8 +1226,7 @@ def parameter_declaration():
         node_value = declarator()
         if node_value is not None:
             return Tree(left, node_value)
-        else:
-            iterator = old_iterator
+        iterator = old_iterator
         old_iterator = iterator
         node_value = abstract_declarator()
         if node_value is not None:
@@ -1279,33 +1287,30 @@ def direct_abstract_declarator():
             if tokens[iterator][1] == 40:
                 iterator += 1
                 right = tokens[iterator - 1][0]
+                if tokens[iterator][1] == 37:
+                    left = Tree(left, node_value, right)
+                    iterator += 1
+                    old_iterator = iterator
+                    node_value = constant_expression()
+                    if node_value is None:
+                        iterator = old_iterator
+                    if tokens[iterator][1] == 38:
+                        iterator += 1
+                        return Tree(left, Tree('[', node_value, ']'))
+                    return None
+                if tokens[iterator][1] == 39:
+                    iterator += 1
+                    old_iterator = iterator
+                    node_value = parameter_type_list()
+                    if node_value is None:
+                        iterator = old_iterator
+                    if tokens[iterator][1] == 40:
+                        iterator += 1
+                        return Tree(left, Tree('(', node_value, ')'))
+                    return None
                 return Tree(left, node_value, right)
             return None
         iterator = old_iterator
-        return None
-    old_iterator = iterator
-    left = direct_abstract_declarator()
-    if left is None:
-        iterator = old_iterator
-    if tokens[iterator][1] == 37:
-        iterator += 1
-        old_iterator = iterator
-        node_value = constant_expression()
-        if node_value is None:
-            iterator = old_iterator
-        if tokens[iterator][1] == 38:
-            iterator += 1
-            return Tree(left, Tree('[', node_value, ']'))
-        return None
-    if tokens[iterator][1] == 39:
-        iterator += 1
-        old_iterator = iterator
-        node_value = parameter_type_list()
-        if node_value is None:
-            iterator = old_iterator
-        if tokens[iterator][1] == 40:
-            iterator += 1
-            return Tree(left, Tree('(', node_value, ')'))
         return None
     return None
 
@@ -1460,5 +1465,5 @@ def constant():
 def start(input_tokens):
     global tokens
     tokens = input_tokens
-    tree = iteration_statement()
+    tree = translation_unit()
     print(str(tree))
