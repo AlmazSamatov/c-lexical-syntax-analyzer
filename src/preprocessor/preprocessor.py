@@ -154,7 +154,8 @@ def parse_include_files(input_code):
             begin_index += 1
 
         if input_code[begin_index] != '"' and input_code[begin_index] != "<":
-            raise Exception('After #include statement came {} symbol instead of dual quote symbol (") or "<" symbol.')
+            raise Exception('After #include statement came {} symbol instead of dual quote symbol (") or "<" symbol.'.
+                            format(input_code[begin_index]))
         elif input_code[begin_index] == '"':
             # search in directory
             end_index = input_code.find('"', begin_index + 1)
@@ -167,6 +168,6 @@ def parse_include_files(input_code):
         elif input_code[begin_index] == '<':
             # search in /libs, because this is system library
             end_index = input_code.find('>', begin_index + 1)
-            input_code = input_code[:end_index + 1] + parse_include_files(input_code[end_index + 1:])
+            input_code = input_code[:include_index] + input_code[end_index + 1:]  # just skip system header files
 
     return input_code
