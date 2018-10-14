@@ -23,8 +23,8 @@ with open("in.txt", "r") as input_file:
 
     with open("out.txt", 'w') as output_file:
         syntax_tree = generate_syntax_tree(tokens)
-        syntax_tree = balance(syntax_tree)
         if syntax_tree is not None:
+            syntax_tree = balance(syntax_tree)
             output_file.write(to_json(syntax_tree))
         else:
             output_file.write("None")
