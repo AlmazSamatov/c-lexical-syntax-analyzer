@@ -1,13 +1,18 @@
 {
-     "Left" : "None",
-     "Node value" : 
+     "Left" : 
      {
-          "Left" : 
+          "Left" : "int",
+          "Node value" : 
           {
-               "Left" : "int",
-               "Node value" : "main",
+               "Left" : "main",
+               "Node value" : "None",
                "Right" : "None"
           },
+          "Right" : "None"
+     },
+     "Node value" : 
+     {
+          "Left" : "None",
           "Node value" : 
           {
                "Left" : "None",
