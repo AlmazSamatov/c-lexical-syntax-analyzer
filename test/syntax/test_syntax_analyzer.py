@@ -1,10 +1,10 @@
 from src.lex.lexical_analyzer import get_next_token
 from src.syntax.syntax_analyzer import generate_syntax_tree
+from src.syntax.tree import Tree
 import src.preprocessor.preprocessor as preprocessor
 
 
 def get_tree(code):
-    tokens = []
     preprocessed_code = preprocessor.start(code)
     tokens = []
     while True:
@@ -16,16 +16,13 @@ def get_tree(code):
 
 
 def test_for_loop():
-    code = '''
-        int main(){
-            int i;
-            int b = 0;
-            for(i = 0; i < 10; i++){
-                 b--;
-            }
-        }
-    '''
-    tree = '''
-        
-    '''
-    assert get_tree(code) is not None
+    code = '''int main(){
+    int i;
+    int b = 0;
+    for(i = 0; i < 10; i++){
+        b--;
+    }
+}'''
+    tree = get_tree(code)
+    assert type(tree) is Tree
+

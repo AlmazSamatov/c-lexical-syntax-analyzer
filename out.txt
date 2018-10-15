@@ -2,34 +2,12 @@
      "Left" : 
      {
           "Left" : "int",
-          "Node value" : 
-          {
-               "Left" : "main",
-               "Node value" : "None",
-               "Right" : "None"
-          },
-          "Right" : "None"
+          "Node value" : "main",
      },
      "Node value" : 
      {
-          "Left" : "None",
-          "Node value" : 
-          {
-               "Left" : "None",
-               "Node value" : 
-               {
-                    "Left" : "None",
-                    "Node value" : 
-                    {
-                         "Left" : "(",
-                         "Node value" : "None",
-                         "Right" : ")"
-                    },
-                    "Right" : "None"
-               },
-               "Right" : "None"
-          },
-          "Right" : "None"
+          "Left" : "(",
+          "Right" : ")"
      },
      "Right" : 
      {
@@ -38,19 +16,23 @@
           {
                "Left" : 
                {
-                    "Left" : "int",
+                    "Left" : 
+                    {
+                         "Left" : "int",
+                         "Node value" : "i",
+                         "Right" : ";"
+                    },
                     "Node value" : 
                     {
-                         "Left" : 
+                         "Left" : "int",
+                         "Node value" : 
                          {
-                              "Left" : "None",
-                              "Node value" : "i",
-                              "Right" : "None"
+                              "Left" : "b",
+                              "Node value" : "=",
+                              "Right" : "0"
                          },
-                         "Node value" : "=",
-                         "Right" : "2"
+                         "Right" : ";"
                     },
-                    "Right" : ";"
                },
                "Node value" : 
                {
@@ -69,7 +51,6 @@
                                         "Right" : "0"
                                    },
                                    "Node value" : ";",
-                                   "Right" : "None"
                               },
                               "Node value" : 
                               {
@@ -80,11 +61,9 @@
                                         "Right" : "10"
                                    },
                                    "Node value" : ";",
-                                   "Right" : "None"
                               },
                               "Right" : 
                               {
-                                   "Left" : "None",
                                    "Node value" : "i",
                                    "Right" : "++"
                               }
@@ -96,14 +75,16 @@
                          "Left" : "{",
                          "Node value" : 
                          {
-                              "Left" : "None",
-                              "Node value" : "None",
-                              "Right" : "None"
+                              "Node value" : 
+                              {
+                                   "Node value" : "b",
+                                   "Right" : "--"
+                              },
+                              "Right" : ";"
                          },
                          "Right" : "}"
                     }
                },
-               "Right" : "None"
           },
           "Right" : "}"
      }
