@@ -39,8 +39,8 @@ def test_if_condition():
     int main(){
         int i = 0;
         int sum = 0;
-        for(i; i < 10; i++){
-             sum += i;
+        if(i == 0){
+            sum = 1;
         }
     }
     '''
