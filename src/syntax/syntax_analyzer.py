@@ -146,7 +146,7 @@ def init_declarator():
     """
     global iterator
     old_iterator = iterator
-    if tokens[iterator-1][1] != 82:
+    if tokens[iterator-1][1] != 82 or tokens[iterator-1][1] != 85:
         node_value = declarator()
     else:
         node_value = declarator(True)
@@ -1725,7 +1725,8 @@ def generate_syntax_tree(input_tokens):
     :param input_tokens: tokens to generate tree from
     :return: AST
     """
-    global tokens
+    global tokens, iterator
     tokens = input_tokens
+    iterator = 0
     tree = translation_unit()
     return tree

@@ -1,6 +1,7 @@
 from src.balancer.balancer import balance
 from src.lex.lexical_analyzer import get_next_token
 from src.syntax.syntax_analyzer import generate_syntax_tree
+from src.syntax.tree import Tree
 import src.preprocessor.preprocessor as preprocessor
 
 

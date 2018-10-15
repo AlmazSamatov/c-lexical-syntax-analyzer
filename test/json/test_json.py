@@ -12,14 +12,18 @@ true_json = '''{
      }
 }'''
 
+
 def get_tree():
     tree = Tree()
     tree.left = 'int'
     tree.node_value = 'main'
     tree.right = Tree()
     tree.right.left = '('
+    tree.right.node_value = 'None'
     tree.right.right = ')'
     return tree
 
+
 def test():
+    print(to_json(get_tree()))
     assert to_json(get_tree()) == true_json

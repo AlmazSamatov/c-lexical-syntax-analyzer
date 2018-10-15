@@ -11,6 +11,7 @@ class PreprocessorTool:
     c_code = ''
 
     def __init__(self, c_code):
+        self.iterator = -1
         self.c_code = c_code
 
     def find(self, string):
