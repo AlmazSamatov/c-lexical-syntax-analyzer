@@ -1,0 +1,232 @@
+{
+     "Left" : 
+     {
+          "Left" : 
+          {
+               "Left" : "int",
+               "Node value" : 
+               {
+                    "Left" : "addNumbers",
+                    "Node value" : 
+                    {
+                         "Left" : "(",
+                         "Node value" : 
+                         {
+                              "Left" : "int",
+                              "Node value" : "n",
+                         },
+                         "Right" : ")"
+                    },
+               },
+               "Right" : ";"
+          },
+          "Node value" : 
+          {
+               "Left" : 
+               {
+                    "Left" : "int",
+                    "Node value" : "main",
+               },
+               "Node value" : 
+               {
+                    "Left" : "(",
+                    "Right" : ")"
+               },
+               "Right" : 
+               {
+                    "Left" : "{",
+                    "Node value" : 
+                    {
+                         "Left" : 
+                         {
+                              "Left" : "int",
+                              "Node value" : "num",
+                              "Right" : ";"
+                         },
+                         "Node value" : 
+                         {
+                              "Left" : 
+                              {
+                                   "Left" : 
+                                   {
+                                        "Left" : 
+                                        {
+                                             "Node value" : 
+                                             {
+                                                  "Node value" : ""Enter a positive integer: "",
+                                                  "Right" : 
+                                                  {
+                                                       "Left" : "(",
+                                                       "Node value" : ""Enter a positive integer: "",
+                                                       "Right" : ")"
+                                                  }
+                                             },
+                                             "Right" : ";"
+                                        },
+                                        "Node value" : 
+                                        {
+                                             "Node value" : 
+                                             {
+                                                  "Node value" : 
+                                                  {
+                                                       "Left" : ""%d"",
+                                                       "Node value" : ",",
+                                                       "Right" : 
+                                                       {
+                                                            "Left" : "&",
+                                                            "Node value" : "num",
+                                                       }
+                                                  },
+                                                  "Right" : 
+                                                  {
+                                                       "Left" : "(",
+                                                       "Node value" : 
+                                                       {
+                                                            "Left" : ""%d"",
+                                                            "Node value" : ",",
+                                                            "Right" : 
+                                                            {
+                                                                 "Left" : "&",
+                                                                 "Node value" : "num",
+                                                            }
+                                                       },
+                                                       "Right" : ")"
+                                                  }
+                                             },
+                                             "Right" : ";"
+                                        },
+                                   },
+                                   "Node value" : 
+                                   {
+                                        "Node value" : 
+                                        {
+                                             "Node value" : 
+                                             {
+                                                  "Left" : ""Sum = %d"",
+                                                  "Node value" : ",",
+                                                  "Right" : 
+                                                  {
+                                                       "Node value" : "num",
+                                                       "Right" : 
+                                                       {
+                                                            "Left" : "(",
+                                                            "Node value" : "num",
+                                                            "Right" : ")"
+                                                       }
+                                                  }
+                                             },
+                                             "Right" : 
+                                             {
+                                                  "Left" : "(",
+                                                  "Node value" : 
+                                                  {
+                                                       "Left" : ""Sum = %d"",
+                                                       "Node value" : ",",
+                                                       "Right" : 
+                                                       {
+                                                            "Node value" : "num",
+                                                            "Right" : 
+                                                            {
+                                                                 "Left" : "(",
+                                                                 "Node value" : "num",
+                                                                 "Right" : ")"
+                                                            }
+                                                       }
+                                                  },
+                                                  "Right" : ")"
+                                             }
+                                        },
+                                        "Right" : ";"
+                                   },
+                              },
+                              "Node value" : 
+                              {
+                                   "Left" : "return",
+                                   "Node value" : "0",
+                                   "Right" : ";"
+                              },
+                         },
+                    },
+                    "Right" : "}"
+               }
+          },
+     },
+     "Node value" : 
+     {
+          "Left" : 
+          {
+               "Left" : "int",
+               "Node value" : "addNumbers",
+          },
+          "Node value" : 
+          {
+               "Left" : "(",
+               "Node value" : 
+               {
+                    "Left" : "int",
+                    "Node value" : "n",
+               },
+               "Right" : ")"
+          },
+          "Right" : 
+          {
+               "Left" : "{",
+               "Node value" : 
+               {
+                    "Left" : "if",
+                    "Node value" : 
+                    {
+                         "Left" : "(",
+                         "Node value" : 
+                         {
+                              "Left" : "n",
+                              "Node value" : "!=",
+                              "Right" : "0"
+                         },
+                         "Right" : ")"
+                    },
+                    "Right" : 
+                    {
+                         "Left" : 
+                         {
+                              "Left" : "return",
+                              "Node value" : 
+                              {
+                                   "Left" : "n",
+                                   "Node value" : "+",
+                                   "Right" : 
+                                   {
+                                        "Node value" : 
+                                        {
+                                             "Left" : "n",
+                                             "Node value" : "-",
+                                             "Right" : "1"
+                                        },
+                                        "Right" : 
+                                        {
+                                             "Left" : "(",
+                                             "Node value" : 
+                                             {
+                                                  "Left" : "n",
+                                                  "Node value" : "-",
+                                                  "Right" : "1"
+                                             },
+                                             "Right" : ")"
+                                        }
+                                   }
+                              },
+                              "Right" : ";"
+                         },
+                         "Node value" : "return",
+                         "Right" : 
+                         {
+                              "Left" : "return",
+                              "Node value" : "n",
+                              "Right" : ";"
+                         }
+                    }
+               },
+               "Right" : "}"
+          }
+     },
+}
